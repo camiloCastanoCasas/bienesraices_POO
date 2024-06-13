@@ -24,5 +24,10 @@
         font-size: 1.8rem;
         color: $blanco;
         text-align: center;
+        padding: 1rem;
+
+        @include tablet{
+            padding: 0;
+        }
     }
 }
