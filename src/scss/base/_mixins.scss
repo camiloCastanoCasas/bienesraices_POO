@@ -21,3 +21,19 @@
     gap: $espaciado;
     grid-template-columns: repeat($columnas, 1fr);
 }
+
+@mixin boton($bgColor, $color, $display) {
+    background-color: $bgColor;
+    color: $color;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-top: calc($separacion / 2);
+    display: $display;
+    font-weight: 500;
+
+    &:hover{
+        background-color: darken($bgColor, 5);
+        transition: all 0.3s;
+    }
+}
