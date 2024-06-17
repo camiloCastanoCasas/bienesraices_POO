@@ -31,9 +31,11 @@
     margin-top: calc($separacion / 2);
     display: $display;
     font-weight: 500;
+    border: none;
 
     &:hover{
         background-color: darken($bgColor, 5);
         transition: all 0.3s;
+        cursor: pointer;
     }
 }
