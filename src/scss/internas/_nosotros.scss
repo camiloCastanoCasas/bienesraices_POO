@@ -1,0 +1,23 @@
+.contenido-nosotros{
+
+    @include tablet{
+        @include grid(2, 3rem); 
+    }
+}
+
+.texto-nosotros {
+    p{
+        text-align: justify;
+    }
+    blockquote {
+        font-weight: 700;
+        margin: 0;
+        font-size: 2.1rem;
+        margin-top: 2rem;
+
+        @include tablet {
+            margin-top: 0;
+            margin-bottom: 2rem
+        }
+    }
+}
