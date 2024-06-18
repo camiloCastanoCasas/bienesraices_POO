@@ -32,10 +32,18 @@
     justify-content: space-between;
 
     h1{
-        text-align: left;
-        color: $blanco;
-        font-weight: 500;
-        line-height: 2;
-        max-width: 80rem;
+        display: none;
     }
+
+    @include tablet{
+        h1{
+            display: block;
+            text-align: left;
+            color: $blanco;
+            font-weight: 500;
+            line-height: 2;
+            max-width: 80rem;
+        }
+    }
+    
 }
