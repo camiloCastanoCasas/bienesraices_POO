@@ -1,3 +1,27 @@
+.derecha{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include tablet{
+        align-items: flex-end;
+    }
+
+    .dark-mode-boton{
+        width: 5rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+
+        @include tablet{
+            margin-top: 0;
+        }
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
 .barra{
     display: flex;
     flex-direction: column;
@@ -7,13 +31,15 @@
 
     @include tablet{
         flex-direction: row;
+        align-items: flex-end;
     }
 }
 
 .navegacion {
     visibility: hidden;
     opacity: 0;
-    transition: visibility .3s ease-in-out, opacity .3s linear;
+    height: 0;
+    transition: visibility .3s ease-in-out, opacity .3s linear, height .3s linear;
 
     @include tablet{
         display: flex;
@@ -59,4 +85,5 @@
 .mostrar{
     visibility: visible;
     opacity: 1;
+    height: auto;
 }
