@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+//Establecer zona horaria de Colombia
+date_default_timezone_set('America/Bogota');
 
 // Conexión a la base de datos
 function conectarDB() : mysqli{
