@@ -39,7 +39,7 @@
             color: $verde;
         }
 
-        input, textarea, select{
+        input:not([type="submit"]), textarea, select{
             background-color: $gris;
         }
     }

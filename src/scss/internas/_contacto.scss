@@ -24,7 +24,7 @@
         display: block;
     }
 
-    input, textarea, select{
+    input:not([type="submit"]), textarea, select{
         width: 100%;
         padding: 0.5rem;
         margin-bottom: 1rem;
