@@ -6,7 +6,18 @@
     @include boton($azul, $blanco, block);
 }
 
-
 .boton-verde{
     @include boton($verde, $blanco, inline-block);
+}
+
+.boton-rojo-block{
+    @include boton($rojo, $blanco, block);
+}
+
+.boton-rojo{
+    @include boton($rojo, $blanco, inline-block);
+}
+
+.boton-verde-block{
+    @include boton($verde, $blanco, block);
 }
