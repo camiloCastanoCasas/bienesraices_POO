@@ -28,115 +28,13 @@
     <section class="seccion contenedor">
         <h2 class="titulo-anuncios">Casas y Apartamentos en Venta</h2>
 
-        <div class="contenedor-anuncios">
-            <div class="anuncio">
-                <picture>
-                    <source srcset="build/img/anuncio1.webp" type="image/webp">
-                    <source srcset="build/img/anuncio1.jpg" type="image/jpeg">
-                    <img loading="lazy" src="build/img/anuncio1.jpg" alt="Anuncio">
-                </picture>
-                <div class="contenido-anuncio">
-                    <div class="descripcion-anuncio">
-                        <h3>Residencia Frente al Lago</h3>
-                        <p class="descripcion">Casa con impresionante vista al lago, acabados de lujo y precio inmejorable.</p>
-                        <p class="precio">$2,500,000,000</p>
-                    </div>
-
-                    <ul class="iconos-caracteristicas">
-                        <li>
-                            <img src="build/img/icono_wc.svg" alt="Icono baño" lazy="loading">
-                            <p>3</p>
-                        </li>
-                        <li>
-                            <img src="build/img/icono_estacionamiento.svg" alt="Icono estacionamiento" lazy="loading">
-                            <p>4</p>
-                        </li>
-                        <li>
-                            <img src="build/img/icono_dormitorio.svg" alt="Icono habitaciones" lazy="loading">
-                            <p>5</p>
-                        </li>
-                    </ul>
-
-                    <a href="anuncio.html" class="boton-azul-block">
-                        Ver Propiedad
-                    </a>
-
-                </div>
-            </div> <!--.anuncio-->
-
-            <div class="anuncio">
-                <picture>
-                    <source srcset="build/img/anuncio2.webp" type="image/webp">
-                    <source srcset="build/img/anuncio2.jpg" type="image/jpeg">
-                    <img loading="lazy" src="build/img/anuncio2.jpg" alt="Anuncio">
-                </picture>
-                <div class="contenido-anuncio">
-                    <div class="descripcion-anuncio">
-                        <h3>Residencia de Lujo</h3>
-                        <p class="descripcion">Casa con diseño moderno, tecnología inteligente y amoblada.</p>
-                        <p class="precio">$2,000,000,000</p>
-                    </div>
-                    
-                    <ul class="iconos-caracteristicas">
-                        <li>
-                            <img src="build/img/icono_wc.svg" alt="Icono baño" lazy="loading">
-                            <p>5</p>
-                        </li>
-                        <li>
-                            <img src="build/img/icono_estacionamiento.svg" alt="Icono estacionamiento" lazy="loading">
-                            <p>3</p>
-                        </li>
-                        <li>
-                            <img src="build/img/icono_dormitorio.svg" alt="Icono habitaciones" lazy="loading">
-                            <p>4</p>
-                        </li>
-                    </ul>
-
-                    <a href="anuncio.html" class="boton-azul-block">
-                        Ver Propiedad
-                    </a>
-                </div>
-            </div> <!--.anuncio-->
-
-            <div class="anuncio">
-                <picture>
-                    <source srcset="build/img/anuncio3.webp" type="image/webp">
-                    <source srcset="build/img/anuncio3.jpg" type="image/jpeg">
-                    <img loading="lazy" src="build/img/anuncio3.jpg" alt="Anuncio">
-                </picture>
-                <div class="contenido-anuncio">
-                    <div class="descripcion-anuncio">
-                        <h3>Finca con piscina</h3>
-                        <p class="descripcion">Casa con piscina, acabados de lujo, y excelente vista al mar.</p>
-                        <p class="precio">$2,500,000,000</p>
-                    </div>
-                    
-
-                    <ul class="iconos-caracteristicas">
-                        <li>
-                            <img src="build/img/icono_wc.svg" alt="Icono baño" lazy="loading">
-                            <p>3</p>
-                        </li>
-                        <li>
-                            <img src="build/img/icono_estacionamiento.svg" alt="Icono estacionamiento" lazy="loading">
-                            <p>4</p>
-                        </li>
-                        <li>
-                            <img src="build/img/icono_dormitorio.svg" alt="Icono habitaciones" lazy="loading">
-                            <p>5</p>
-                        </li>
-                    </ul>
-
-                    <a href="anuncio.html" class="boton-azul-block">
-                        Ver Propiedad
-                    </a>
-
-                </div>
-            </div> <!--.anuncio-->
-        </div>
+        <?php 
+            $limite = 3;
+            include 'includes/anuncios.php'; 
+        ?>      
 
         <div class="alinear-derecha">
-            <a href="anuncios.html" class="boton-verde">Ver Todas</a>
+            <a href="anuncios.php" class="boton-verde">Ver Todas</a>
         </div>
     </section>
 

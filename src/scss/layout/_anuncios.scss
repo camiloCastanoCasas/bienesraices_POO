@@ -23,6 +23,7 @@
 
     h3{
         font-weight: 500;
+        font-size: 2.1rem;
     }
 }
 
@@ -35,10 +36,10 @@
 @include tablet{
     .contenido-anuncio{
         .descripcion-anuncio{
-            height: 21rem;
+            height: 21rem;            
         }
         .descripcion{
-            height: 10rem ;
+            height: 10rem;  
         }
     }
 }
