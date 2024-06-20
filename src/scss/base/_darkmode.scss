@@ -43,4 +43,16 @@
             background-color: $gris;
         }
     }
+
+    table.propiedades{
+        
+        tbody{
+            tr{
+                background-color: $grisOscuro;
+            }
+            td{
+                color: $gris;
+            }
+    }
+    }
 }
