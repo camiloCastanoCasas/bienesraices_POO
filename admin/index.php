@@ -19,6 +19,8 @@
         <h1 class="titulo-index">Administrador de Bienes Raices</h1>
         <?php if(intval($resultado) === 1): ?>
             <p class="alerta exito">Propiedad creada correctamente</p>
+        <?php elseif(intval($resultado) === 2): ?>
+            <p class="alerta exito">Propiedad actualizada correctamente</p>
         <?php endif; ?>
         <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
 
@@ -40,7 +42,7 @@
                     <td><img src="/imagenes/<?php echo $propiedad['imagen']?>" alt="" class="imagen-tabla"></td>
                     <td>$ <?php echo $propiedad['precio']?></td>
                     <td class="botones">
-                        <a href="#" class="boton-azul-block">Actualizar</a>
+                        <a href="admin/propiedades/actualizar.php?id=<?php echo $propiedad['id_propiedad']?>" class="boton-azul-block">Actualizar</a>
                         <a href="#" class="boton-rojo-block">Eliminar</a>
                     </td>
                 </tr>
