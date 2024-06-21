@@ -1,5 +1,13 @@
 <?php 
 
+    require '../../includes/funciones.php';
+    $auth = autenticado();
+
+    //Revisar si el usuario está autenticado
+    if(!$auth){
+        header('Location: /');
+    }
+
     //Base de datos
     require '../../includes/config/database.php';
     $db = conectarDB();
@@ -90,8 +98,6 @@
         }   
     }
 
-    //Funciones
-    require '../../includes/funciones.php';
     incluirTemplate('header');
 ?>
 

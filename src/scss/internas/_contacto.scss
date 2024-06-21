@@ -55,5 +55,12 @@
     }
 }
 
+.formulario-inicio-sesion{
+    margin: 0 auto;
+    @include tablet{
+        max-width: 50%;
+    }
+}
+
 
 

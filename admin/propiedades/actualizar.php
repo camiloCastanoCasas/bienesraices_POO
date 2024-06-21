@@ -1,5 +1,13 @@
 <?php 
 
+    require '../../includes/funciones.php';
+    $auth = autenticado();
+
+    //Revisar si el usuario está autenticado
+    if(!$auth){
+        header('Location: /');
+    }
+
     //Obtener el ID de la URL
     $id = $_GET['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT); //Validar que sea un entero
@@ -108,8 +116,6 @@
         }   
     }
 
-    //Funciones
-    require '../../includes/funciones.php';
     incluirTemplate('header');
 ?>
 
