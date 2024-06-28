@@ -1,6 +1,5 @@
 <?php
     //Conexión a la base de datos
-    require 'includes/config/database.php';
     $db = conectarDB();
 
     //Consultar las propiedades en la base de datos

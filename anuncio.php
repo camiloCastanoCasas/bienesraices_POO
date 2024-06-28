@@ -8,8 +8,9 @@
         header('Location: /');
     }
 
+    require 'includes/app.php';
+
     //Conexión a la base de datos
-    require 'includes/config/database.php';
     $db = conectarDB();
 
     //Consultar la propiedad en la base de datos
@@ -25,7 +26,6 @@
 
     $propiedad = mysqli_fetch_assoc($resultado);
 
-    require 'includes/funciones.php';
     incluirTemplate('header');
 ?>
 

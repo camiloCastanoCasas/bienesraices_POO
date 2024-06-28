@@ -1,0 +1,17 @@
+{
+    "name": "camilo/bienesraices_poo",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./clases"
+        }
+    },
+    "authors": [
+        {
+            "name": "Camilo Castano",
+            "email": "camilo.castano.casas@gmail.com"
+        }
+    ],
+    "require": {}
+}
