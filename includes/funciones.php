@@ -10,15 +10,20 @@ function incluirTemplate(string $nombre, bool $inicio = false){
 }
 
 //Función para verificar si el usuario está autenticado
-function autenticado() : bool{
+function autenticado() : void{
     session_start();
 
-    $auth = $_SESSION['login'];
-
-    if($auth){
-        return true;
+    if(!$_SESSION['login']){
+        header('Location: /');
     }
-    return false;
+}
+
+//Función helper 
+function debug($variable){
+    echo "<pre>";
+    var_dump($variable);
+    echo "</pre>";
+    exit;
 }
 
 ?>
