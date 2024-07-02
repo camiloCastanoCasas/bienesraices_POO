@@ -5,6 +5,8 @@ namespace App;
 class Propiedad{
 
     protected static $db;
+    //Definir las columnas de la base de datos para mapear el objeto
+    protected static $columnasDB = ['id', 'nombre', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'id_vendedor'];
     public $id;
     public $nombre;
     public $precio;
@@ -29,12 +31,39 @@ class Propiedad{
     }
 
     public function guardar(){
-        //Insertar en la base de datos
-        $query = "INSERT INTO propiedades (nombre, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, id_vendedor) VALUES ('$this->nombre', '$this->precio', '$this->imagen' , '$this->descripcion', '$this->habitaciones', '$this->wc', '$this->estacionamiento', '$this->creado', '$this->id_vendedor')";
+
+        //Sanitizar los datos
+        $atributos = $this->sanitizarAtributos();
+        
+        //Insertar en la base de datos - Se crea el query para insertar los datos
+        $query = "INSERT INTO propiedades (";
+        $query .= join(', ', array_keys($atributos)); //Se unen las claves de los atributos
+        $query .= " ) VALUES ('";
+        $query .= join("', '", array_values($atributos)); //Se unen los valores de los atributos
+        $query .= "')";
 
         $resultado = self::$db->query($query);
 
-        debug($resultado);
+    }
+
+    //Identificar y unir los atributos de la base de datos
+    public function atributos(){
+        $atributos = [];
+        foreach (self::$columnasDB as $columna) {
+            if($columna === 'id') continue; //No se incluye el id
+            $atributos[$columna] = $this->$columna;
+        }
+        return $atributos;
+    }
+
+    //Sanitizar los datos antes de insertarlos en la base de datos
+    public function sanitizarAtributos(){
+        $atributos = $this->atributos();
+        $sanitizado = [];
+        foreach($atributos as $key => $value){
+            $sanitizado[$key] = self::$db->escape_string($value);
+        }
+        return $sanitizado;
     }
 
     //Conectar a la base de datos
