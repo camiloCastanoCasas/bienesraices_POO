@@ -35,7 +35,7 @@ class Propiedad{
         $this->id_vendedor = $args['id_vendedor'] ?? '';
     }
 
-    public function guardar(){
+    public function guardar() : bool{
 
         //Sanitizar los datos
         $atributos = $this->sanitizarAtributos();
@@ -49,10 +49,12 @@ class Propiedad{
 
         $resultado = self::$db->query($query);
 
+        return $resultado;
+
     }
 
     //Identificar y unir los atributos de la base de datos
-    public function atributos(){
+    public function atributos() : array{
         $atributos = [];
         foreach (self::$columnasDB as $columna) {
             if($columna === 'id') continue; //No se incluye el id
@@ -62,7 +64,7 @@ class Propiedad{
     }
 
     //Sanitizar los datos antes de insertarlos en la base de datos
-    public function sanitizarAtributos(){
+    public function sanitizarAtributos() : array{
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach($atributos as $key => $value){
@@ -72,19 +74,27 @@ class Propiedad{
     }
 
     //Conectar a la base de datos
-    public static function setDB($database){
+    public static function setDB($database) : void{
         self::$db = $database;
     }
 
     //Mensajes de error
-    public static function getErrores(){
+    public static function getErrores() : array{
         return self::$errores;
     }
 
-    public function validar(){
+    //Guardar la imagen
+    public function setImagen($imagen) : void{
+        if($imagen){
+            $this->imagen = $imagen;
+        }
+    }
+
+    public function validar() : array{
         $tiposErrores = [
             'nombre' => 'Debes añadir un nombre',
             'precio' => 'Debes añadir un precio',
+            'imagen' => 'Debes añadir una imagen',
             'descripcion' => 'La descripción es obligatoria',
             'habitaciones' => 'Debes añadir el número de habitaciones',
             'wc' => 'Debes añadir el número de baños',
@@ -99,15 +109,5 @@ class Propiedad{
             }
         }
         return self::$errores;
-
-        // //Validar la imagen
-        // //Si no hay imagen
-        // if(!$this->imagen['name'] || $this->imagen['error']){
-        //     $errores[] = 'Debes añadir una imagen';
-        // }
-        // //Validar tamaño de la imagen
-        // if($this->imagen['size'] > 1000 * 2000){
-        //     $errores[] = 'La imagen es muy pesada';
-        // }
     }
 }

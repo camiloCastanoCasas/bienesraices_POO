@@ -4,6 +4,10 @@
 
     use App\Propiedad;
 
+    //Importar la libreria para subir imagenes
+    use Intervention\Image\ImageManager as Image;
+    use Intervention\Image\Drivers\Gd\Driver; 
+
     autenticado();
 
     //Base de datos
@@ -25,33 +29,40 @@
     //Ejecutar el código después de que el usuario envía el formulario
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+        /* Crear una nueva instancia de la clase Propiedad */
         $propiedad = new Propiedad($_POST);
 
+        /* Subir imagen */
+
+        //Si no existe la carpeta entonces se crea
+        if(!is_dir(CARPETA_IMAGENES)){
+            mkdir(CARPETA_IMAGENES);
+        }
+        
+        //Generar un nombre único para la imagen
+        $nombreImagen = md5(uniqid(rand(), true)) . strrchr($_FILES['imagen']['name'], '.');
+
+        /* Asignar la imagen a la propiedad */
+        if($_FILES['imagen']['tmp_name']){
+            //Crear una instancia de la clase Image
+            $manager = new Image(Driver::class);
+            //Redimensionar la imagen
+            $image = $manager->read($_FILES['imagen']['tmp_name'])->cover(800,600);  
+            //Asignar el nombre de la imagen a la propiedad
+            $propiedad->setImagen($nombreImagen);
+        }
+
+        //Validar
         $errores = $propiedad->validar();
         
         //Si no hay errores entonces se procede a insertar en la base de datos
         if(empty($errores)){
             
-            $propiedad->guardar();
+            //Guardar la imagen en el servidor
+            $image->save(CARPETA_IMAGENES . $nombreImagen);
 
-            $imagen = $_FILES['imagen']; //Asignar files a una variable
-
-            //Subir imagen
-            //Crear carpeta
-            $carpeta = '../../imagenes/';
-
-            if(!is_dir($carpeta)){
-                mkdir($carpeta);
-            }
-            
-            //Generar un nombre único
-            $nombreImagen = md5(uniqid(rand(), true)) . strrchr($imagen['name'], '.');
-
-            //Mover imagen a la carpeta
-            move_uploaded_file($imagen['tmp_name'], $carpeta . $nombreImagen);
-
-
-            $resultado = mysqli_query($db, $query);
+            //Insertar en la base de datos
+            $resultado = $propiedad->guardar();
 
             if($resultado){
                 header('Location: /admin?resultado=1');
