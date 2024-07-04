@@ -1,14 +1,7 @@
 <?php 
-    require '../includes/funciones.php';
-    $auth = autenticado();
+    require '../includes/app.php';
+    autenticado();
 
-    //Revisar si el usuario está autenticado
-    if(!$auth){
-        header('Location: /');
-    }
-
-    //Base de datos
-    require '../includes/config/database.php';
     $db = conectarDB();
 
     //Obtener propiedades

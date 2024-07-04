@@ -13,9 +13,6 @@
     $consulta = "SELECT * FROM vendedores";
     $vendedores = mysqli_query($db, $consulta);
 
-    //Arreglo con mensajes de errores
-    $errores = [];
-
     //Inicializar variables como Strings vacíos
     $nombre = '';
     $precio = '';
@@ -30,51 +27,14 @@
 
         $propiedad = new Propiedad($_POST);
 
-        $propiedad->guardar();
-
-        debug($propiedad);
-
-        // Sanitizar los datos
-        $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
-        $precio = mysqli_real_escape_string($db, $_POST['precio']);
-        $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
-        $habitaciones = mysqli_real_escape_string($db, $_POST['habitaciones']);
-        $wc = mysqli_real_escape_string($db, $_POST['wc']);
-        $estacionamiento = mysqli_real_escape_string($db, $_POST['estacionamiento']);
-        $id_vendedor = mysqli_real_escape_string($db, $_POST['id_vendedor']);
-        $creado = date('Y/m/d');
-        $imagen = $_FILES['imagen']; //Asignar files a una variable
-
-        //Errores
-        $tiposErrores = [
-            'nombre' => 'Debes añadir un nombre',
-            'precio' => 'Debes añadir un precio',
-            'descripcion' => 'La descripción es obligatoria',
-            'habitaciones' => 'Debes añadir el número de habitaciones',
-            'wc' => 'Debes añadir el número de baños',
-            'estacionamiento' => 'Debes añadir el número de estacionamientos',
-            'id_vendedor' => 'Debes elegir un vendedor',
-        ];
-
-        //Validar que no haya campos vacíos
-        foreach($tiposErrores as $tipo => $error){
-            if(!$$tipo){
-                $errores[] = $error;
-            }
-        }
-
-        //Validar la imagen
-        //Si no hay imagen
-        if(!$imagen['name'] || $imagen['error']){
-            $errores[] = 'Debes añadir una imagen';
-        }
-        //Validar tamaño de la imagen
-        if($imagen['size'] > 1000 * 2000){
-            $errores[] = 'La imagen es muy pesada';
-        }
-
+        $errores = $propiedad->validar();
+        
         //Si no hay errores entonces se procede a insertar en la base de datos
         if(empty($errores)){
+            
+            $propiedad->guardar();
+
+            $imagen = $_FILES['imagen']; //Asignar files a una variable
 
             //Subir imagen
             //Crear carpeta

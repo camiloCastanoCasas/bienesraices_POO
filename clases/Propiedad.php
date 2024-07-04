@@ -7,6 +7,11 @@ class Propiedad{
     protected static $db;
     //Definir las columnas de la base de datos para mapear el objeto
     protected static $columnasDB = ['id', 'nombre', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'id_vendedor'];
+
+    //Errores
+    protected static $errores = [];
+
+    //Definir atributos de la clase
     public $id;
     public $nombre;
     public $precio;
@@ -69,5 +74,40 @@ class Propiedad{
     //Conectar a la base de datos
     public static function setDB($database){
         self::$db = $database;
+    }
+
+    //Mensajes de error
+    public static function getErrores(){
+        return self::$errores;
+    }
+
+    public function validar(){
+        $tiposErrores = [
+            'nombre' => 'Debes añadir un nombre',
+            'precio' => 'Debes añadir un precio',
+            'descripcion' => 'La descripción es obligatoria',
+            'habitaciones' => 'Debes añadir el número de habitaciones',
+            'wc' => 'Debes añadir el número de baños',
+            'estacionamiento' => 'Debes añadir el número de estacionamientos',
+            'id_vendedor' => 'Debes elegir un vendedor',
+        ];
+
+        //Validar que no haya campos vacíos
+        foreach($tiposErrores as $tipo => $error){
+            if(!$this->$tipo){
+                self::$errores[] = $error;
+            }
+        }
+        return self::$errores;
+
+        // //Validar la imagen
+        // //Si no hay imagen
+        // if(!$this->imagen['name'] || $this->imagen['error']){
+        //     $errores[] = 'Debes añadir una imagen';
+        // }
+        // //Validar tamaño de la imagen
+        // if($this->imagen['size'] > 1000 * 2000){
+        //     $errores[] = 'La imagen es muy pesada';
+        // }
     }
 }
