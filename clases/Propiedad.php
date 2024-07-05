@@ -6,13 +6,13 @@ class Propiedad{
 
     protected static $db;
     //Definir las columnas de la base de datos para mapear el objeto
-    protected static $columnasDB = ['id', 'nombre', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'id_vendedor'];
+    protected static $columnasDB = ['id_propiedad', 'nombre', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'id_vendedor'];
 
     //Errores
     protected static $errores = [];
 
     //Definir atributos de la clase
-    public $id;
+    public $id_propiedad;
     public $nombre;
     public $precio;
     public $imagen;
@@ -57,7 +57,7 @@ class Propiedad{
     public function atributos() : array{
         $atributos = [];
         foreach (self::$columnasDB as $columna) {
-            if($columna === 'id') continue; //No se incluye el id
+            if($columna === 'id_propiedad') continue; //No se incluye el id
             $atributos[$columna] = $this->$columna;
         }
         return $atributos;
@@ -109,5 +109,41 @@ class Propiedad{
             }
         }
         return self::$errores;
+    }
+
+    //Listar las propiedades
+    public static function all() : array{
+        $query = "SELECT * FROM propiedades";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
+    //Consultar la base de datos y retornar los resultados en un array
+    public static function consultarSQL($query) : array{
+        //Consultar la base de datos
+        $resultado = self::$db->query($query);
+
+        //Iterar los resultados
+        $array = [];
+        while($registro = $resultado->fetch_assoc()){
+            $array[] = self::crearObjeto($registro);
+        }
+
+        //Liberar la memoria
+        $resultado->free();
+
+        //Retornar los resultados
+        return $array;
+    }
+
+    //Obtener una propiedad y convertirla en un objeto
+    protected static function crearObjeto($registro) : object{
+        $objeto = new self; //Instancia de la clase Propiedad
+        foreach($registro as $key => $value){
+            if(property_exists($objeto, $key)){
+                $objeto->$key = $value;
+            }
+        }
+        return $objeto;
     }
 }

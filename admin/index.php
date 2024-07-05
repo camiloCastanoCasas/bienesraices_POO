@@ -2,13 +2,11 @@
     require '../includes/app.php';
     autenticado();
 
-    $db = conectarDB();
+    //Implementar la función para obtener todas las propiedades con ActiveRecord
+    use App\Propiedad;
 
-    //Obtener propiedades
-    $consulta = "SELECT * FROM propiedades";
+    $propiedades = Propiedad::all();
 
-    //Consultar la base de datos
-    $resultadoConsulta = mysqli_query($db, $consulta);
 
     //Muestra mensaje condicional
     $resultado = $_GET['resultado'] ?? null;
@@ -58,18 +56,18 @@
                 </tr>
             </thead>
             <tbody>
-                <?php while($propiedad = mysqli_fetch_assoc($resultadoConsulta)):?>
+                <?php foreach($propiedades as $propiedad): ?>
                 <tr>
-                    <td><?php echo $propiedad['id_propiedad']?></td>
-                    <td><?php echo $propiedad['nombre']?></td>
-                    <td><img src="/imagenes/<?php echo $propiedad['imagen']?>" alt="" class="imagen-tabla"></td>
-                    <td>$ <?php echo $propiedad['precio']?></td>
+                    <td><?php echo $propiedad->id_propiedad; ?></td>
+                    <td><?php echo $propiedad->nombre; ?></td>
+                    <td><img src="/imagenes/<?php echo $propiedad->imagen; ?>" alt="" class="imagen-tabla"></td>
+                    <td>$ <?php echo $propiedad->precio?></td>
                     <td class="botones">
-                        <a href="admin/propiedades/actualizar.php?id=<?php echo $propiedad['id_propiedad']?>" class="boton-azul-block">Actualizar</a>
-                        <a href="admin/?id=<?php echo $propiedad['id_propiedad']?>" class="boton-rojo-block">Eliminar</a>
+                        <a href="admin/propiedades/actualizar.php?id=<?php echo $propiedad->id_propiedad?>" class="boton-azul-block">Actualizar</a>
+                        <a href="admin/?id=<?php echo $propiedad->id_propiedad?>" class="boton-rojo-block">Eliminar</a>
                     </td>
                 </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </main>
